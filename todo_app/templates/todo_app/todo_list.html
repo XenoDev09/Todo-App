@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head><title>Todo</title></head>
+<body>
+  <h2>Todos</h2>
+  <p><a href="{% url 'todo_app:create' %}">+ New</a></p>
+
+  <ul>
+    {% for t in todos %}
+      <li>
+        <form method="post" action="{% url 'todo_app:toggle' t.pk %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">{{ t.completed|yesno:"✅,⬜" }}</button>
+        </form>
+
+        {% if t.completed %}<s>{{ t.title }}</s>{% else %}{{ t.title }}{% endif %}
+        | <a href="{% url 'todo_app:update' t.pk %}">Edit</a>
+        | <a href="{% url 'todo_app:delete' t.pk %}">Delete</a>
+      </li>
+    {% empty %}
+      <li>No todos yet.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
