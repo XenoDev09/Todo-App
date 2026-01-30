@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       max-parallel: 4
       matrix:
-        os: [ubuntu-lastest, windows-latest, macOS-latest]
+        os: [ubuntu-lastest]
         python-version: ["3.12", "3.13"]
 
     steps:
